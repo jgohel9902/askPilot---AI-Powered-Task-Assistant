@@ -1,0 +1,473 @@
+/* ------------------------------
+   CLEAN PRO BASE (P3 - Playful Neo compatible)
+   Modern SaaS UI – tight, centered, crisp, with subtle depth
+--------------------------------*/
+
+:root {
+  --bg: #f6f8fb;
+  --bg-soft: #ffffff;
+  --panel: #ffffffcc;
+  --text: #111827;
+  --muted: #6b7280;
+  --brand: #2463eb;
+  --brand-2: #7c3aed;
+  --card: #ffffff;
+  --border: rgba(0, 0, 0, 0.08);
+  --shadow: 0 8px 20px rgba(0,0,0,0.05);
+  --radius: 14px;
+
+  --ok: #059669;
+  --warn: #eab308;
+  --danger: #dc2626;
+}
+
+html[data-theme="dark"] {
+  --bg: #0d1117;
+  --bg-soft: #11161f;
+  --panel: rgba(17, 22, 31, 0.85);
+  --text: #e6edf3;
+  --muted: #9ca3af;
+  --brand: #4c8bf5;
+  --brand-2: #7c3aed;
+  --card: rgba(19, 25, 37, 0.9);
+  --border: rgba(255,255,255,0.08);
+  --shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+
+/* GLOBAL RESET */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* APP LAYOUT */
+.app-shell {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  backdrop-filter: blur(10px);
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  transition: width 0.25s ease;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* TOPBAR */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--panel);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+}
+
+/* CENTERED CONTAINER */
+/* GENERIC CONTAINER — now FULL width by default */
+.container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 18px;
+  transition: transform 0.25s ease, max-width 0.25s ease;
+}
+
+/* Narrow variant, used by Topbar only */
+.container.narrow {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Page content wrapper should stretch and never scale */
+.content-wrap {
+  width: 100%;
+  padding: 24px;
+  transform: none !important;
+  transform-origin: unset !important;
+}
+
+/* CARD */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover { transform: translateY(-2px); }
+
+.card h3 { font-size: 16px; margin-bottom: 10px; }
+
+/* SIDEBAR */
+.sidebar .brand {
+  padding: 18px;
+  font-weight: 700;
+  font-size: 18px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar .nav {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.sidebar .nav a {
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.sidebar .nav a.active {
+  background: var(--brand);
+  color: white;
+}
+.sidebar .nav a:hover {
+  background: rgba(36, 99, 235, 0.12);
+  transform: translateX(2px);
+}
+
+.sidebar .footer {
+  padding: 14px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+/* INPUTS + BUTTONS */
+.input {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-soft);
+  color: var(--text);
+  border-radius: 10px;
+}
+
+.button {
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.button:hover { transform: translateY(-1px); }
+
+.button.primary {
+  background: linear-gradient(90deg, var(--brand), var(--brand-2));
+  border: none;
+  color: white;
+}
+.button.danger {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.small { font-size: 12px; color: var(--muted); }
+
+/* TASK BOARD */
+.task-columns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.task {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: 0.2s ease;
+}
+.task:hover { transform: translateY(-2px); }
+
+.dragging { opacity: 0.7; transform: scale(0.97); }
+
+.dropzone {
+  min-height: 8px;
+  border: 1px dashed transparent;
+  border-radius: 12px;
+  transition: 0.2s;
+}
+.dropzone.over {
+  border-color: var(--brand);
+  background: rgba(36, 99, 235, 0.06);
+}
+
+/* BADGES */
+.badges { display: flex; gap: 6px; flex-wrap: wrap; }
+.badge {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.badge.high { color: var(--danger); border-color: var(--danger); }
+.badge.medium { color: var(--warn); border-color: var(--warn); }
+.badge.low { color: var(--ok); border-color: var(--ok); }
+
+/* STACK + FORM GRID */
+.stack > * + * { margin-top: 14px; }
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 14px;
+}
+@media (max-width: 900px) {
+  .form-grid { grid-template-columns: 1fr; }
+}
+.field label {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+/* COMPACT MODE */
+body[data-compact="1"] .container { max-width: 900px; padding: 14px; }
+body[data-compact="1"] .card { padding: 12px; border-radius: 12px; }
+body[data-compact="1"] .task { padding: 10px; border-radius: 10px; }
+
+/* --- SaaS Polish Pack (B3-A) additions --- */
+.kpi-num { font-size: 24px; font-weight: 700; }
+
+/* Empty state */
+.emptystate {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  padding: 20px;
+  color: var(--muted);
+}
+.emptystate svg { margin-bottom: 10px; }
+.emptystate-title { font-weight: 700; color: var(--text); }
+.emptystate-sub { font-size: 13px; margin-top: 6px; }
+.emptystate-action { margin-top: 10px; }
+
+/* Button micro-interactions */
+.button:active { transform: translateY(0); }
+.button:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+  border-color: transparent;
+}
+
+/* === Full-screen container layout === */
+html, body, #root {
+  height: 100%;
+}
+
+.app-shell {
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr; /* sidebar + main */
+}
+
+/* Ensure main area fills viewport height and scrolls if needed */
+.main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* Optional: make cards look good edge-to-edge */
+.card {
+  /* if you want slightly tighter look on huge monitors, uncomment max-width below */
+  /* max-width: 100%; */
+}
+
+/* Keep sidebar from squeezing too much on small screens */
+.sidebar {
+  min-width: 220px; /* or your collapsed/expanded logic will control width */
+}
+/* === Full-width layout overrides === */
+.app-shell { min-height: 100vh; }
+.main { min-width: 0; }
+
+
+/* Cards breathe but don't look tiny on big screens */
+.card { max-width: none; }
+
+/* Dashboard content: tasks + AI side by side on wide screens */
+.content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;  /* board / right column */
+  gap: 16px;
+}
+@media (max-width: 1200px) { .content { grid-template-columns: 1fr; } }
+
+/* Task board columns fill full width */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* 3 equal columns */
+  gap: 12px;
+}
+@media (max-width: 1100px) { .board { grid-template-columns: 1fr; } }
+
+/* Optional: make KPI row expand nicely */
+.row { display: flex; gap: 12px; }
+.row > * { flex: 1 1 0; }
+
+/* --- Fix Topbar layout to be one horizontal row --- */
+.topbar .container { width: 100%; }
+
+.topbar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: nowrap;             /* prevent vertical stacking */
+  width: 100%;
+  min-height: 56px;
+}
+
+.topbar-title {
+  font-weight: 700;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.topbar-search {
+  flex: 1 1 auto;                /* search grows */
+  min-width: 240px;
+}
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;                /* keep actions fixed; no wrapping */
+}
+
+.topbar-actions .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  min-width: 36px;
+  padding: 0 10px;
+}
+
+/* If screen gets really narrow, shrink search but keep actions inline */
+@media (max-width: 900px) {
+  .topbar-search { min-width: 140px; }
+}
+/* ====== FULL-WIDTH + FULL-HEIGHT DASHBOARD OVERRIDES ====== */
+
+/* 1) Make the page content area (under the topbar) fill the screen */
+html, body, #root { height: 100%; }
+.app-shell { min-height: 100%; }
+.main { height: 100%; display: flex; flex-direction: column; }
+
+/* 2) The container should stretch and NOT cap width */
+.container {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 16px 20px !important;
+  transform: none !important;
+}
+
+/* The content wrapper inside pages should take all remaining height */
+.content-wrap {
+  flex: 1 1 auto;         /* under the topbar, use the rest of the viewport */
+  display: flex;
+  flex-direction: column;
+  min-height: 0;          /* allow inner scrollers */
+}
+
+/* 3) Make the main dashboard grid full width and full height */
+.content {
+  /* full width across the page */
+  width: 100%;
+  /* fill height under topbar */
+  flex: 1 1 auto;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: 3fr 1.2fr;   /* Tasks (left) | AI (right) */
+  gap: 16px;
+}
+@media (max-width: 1200px) {
+  .content { grid-template-columns: 1fr; }
+}
+
+/* 4) Ensure the grid children expand and their cards fill the cell */
+.content > * {
+  display: flex;          /* wrapper grows */
+  min-height: 0;
+}
+.content > * > .card {
+  flex: 1 1 auto;         /* the visible card fills the cell */
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* 5) Tasks board: the big Tasks card should stretch vertically and its columns scroll if needed */
+.card:has(.board) {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+.board {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+@media (max-width: 1100px) { .board { grid-template-columns: 1fr; } }
+.board-column { display: flex; flex-direction: column; min-height: 0; }
+.board-column .column-body { flex: 1 1 auto; min-height: 0; overflow: auto; display: grid; gap: 10px; }
+
+/* 6) KPI row and Quick Add should span the page width naturally */
+.row { display: flex; gap: 12px; }
+.row > * { flex: 1 1 0; }
+
+/* 7) Optional: slightly tighter padding on very wide screens */
+@media (min-width: 1600px) {
+  .container { padding-left: 28px !important; padding-right: 28px !important; }
+}

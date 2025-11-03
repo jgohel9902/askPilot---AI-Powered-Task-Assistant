@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>askPilot</title>
+    <style>
+      #fatal {
+        position: fixed; inset: 12px; background: #1b2432; color: #fff;
+        border: 1px solid #334; border-radius: 10px; padding: 12px;
+        z-index: 999999; font: 13px/1.5 ui-sans-serif, system-ui, Segoe UI, Arial;
+        display:none; white-space: pre-wrap; overflow:auto;
+      }
+      #fatal b { color: #ffb4b4; }
+    </style>
+    <script>
+      (function(){
+        const box = document.createElement('div'); box.id = 'fatal'; document.addEventListener('DOMContentLoaded', () => document.body.appendChild(box));
+        const show = (msg) => { try { box.style.display='block'; box.innerText = '💥 Runtime error:\\n\\n' + msg; } catch {}
+        };
+        window.addEventListener('error', e => show((e.error && (e.error.stack||e.error.message)) || e.message));
+        window.addEventListener('unhandledrejection', e => show((e.reason && (e.reason.stack||e.reason.message)) || String(e.reason)));
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
